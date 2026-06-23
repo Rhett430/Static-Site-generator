@@ -9,7 +9,9 @@ def generate_pages_recursive(
     for filename in os.listdir(dir_path_content):
         from_path = os.path.join(dir_path_content, filename)
         dest_path = os.path.join(dest_dir_path, filename)
-        if os.path.isfile(from_path):
+        if filename.startswith("."):
+            continue
+        elif os.path.isfile(from_path):
             dest_path = Path(dest_path).with_suffix(".html")
             generate_page(from_path, template_path, dest_path, basepath)
         else:
